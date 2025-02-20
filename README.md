@@ -58,12 +58,14 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 1. Clone the repository
 2. Install dependencies
 ```cd ai-task-manager
-npm install
-```
+npm install```
+
 3. Set up environment variables
 
 ```cp .env.example .env```
+
 env
+
 ```VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key```
 
