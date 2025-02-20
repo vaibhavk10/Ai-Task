@@ -118,7 +118,8 @@ create policy "Users can update their own tasks"
 
 create policy "Users can delete their own tasks"
   on public.tasks for delete
-  using (auth.uid() = created_by);```
+  using (auth.uid() = created_by);
+  ```
 
 4. Start the development server
 ```bash
