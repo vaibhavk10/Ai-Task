@@ -91,7 +91,7 @@ npm run dev
 ![Tasks](src/ss/tasks.jpg)
 
 ### AI Assistant Interface
-![AI Assistant](src/ss/ai-assistant.jpg)
+![AI Assistant](src/ss/ai.jpg)
 
 ## 🏗️ Project Structure
 ```
