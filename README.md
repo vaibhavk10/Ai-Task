@@ -58,7 +58,7 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 1. Clone the repository
 ```bash
 git clone https://github.com/vaibhavk10/Ai-Task.git
-cd ai-task-manager
+cd Ai-Task
 ```
 
 2. Install dependencies
@@ -76,6 +76,49 @@ Add your Supabase credentials to `.env`:
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+Supbase SQL Editor
+
+```-- Drop existing table and policies
+drop policy if exists "Enable read access for all users" on public.tasks;
+drop policy if exists "Enable insert access for all users" on public.tasks;
+drop policy if exists "Enable update access for all users" on public.tasks;
+drop policy if exists "Enable delete access for all users" on public.tasks;
+drop table if exists public.tasks;
+
+create table public.tasks (
+  id uuid default gen_random_uuid() primary key,
+  title text not null,
+  description text,
+  status text not null default 'todo',
+  due_date timestamp with time zone,
+  assignee_id uuid references auth.users(id),
+  created_by uuid references auth.users(id),
+  created_at timestamp with time zone default now(),
+  updated_at timestamp with time zone default now(),
+  priority text default 'medium',
+  comments_count integer default 0
+);
+
+-- Enable RLS
+alter table public.tasks enable row level security;
+
+-- Create policies
+create policy "Users can view their own tasks"
+  on public.tasks for select
+  using (auth.uid() = created_by or auth.uid() = assignee_id);
+
+create policy "Users can create tasks"
+  on public.tasks for insert
+  with check (auth.uid() = created_by);
+
+create policy "Users can update their own tasks"
+  on public.tasks for update
+  using (auth.uid() = created_by);
+
+create policy "Users can delete their own tasks"
+  on public.tasks for delete
+  using (auth.uid() = created_by);```
 
 4. Start the development server
 ```bash
