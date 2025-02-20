@@ -64,7 +64,8 @@ const Sidebar = ({
 
   return (
     <div className={cn(
-      "flex flex-col h-full w-full bg-white p-4",
+      "flex flex-col h-full w-full bg-white dark:bg-gray-900 p-4",
+      "text-gray-900 dark:text-gray-100",
       className
     )}>
       {/* User Profile Section */}
@@ -77,8 +78,8 @@ const Sidebar = ({
           />
         </Avatar>
         <div className="flex flex-col">
-          <span className="font-medium text-sm">{userName}</span>
-          <span className="text-xs text-gray-500">{user?.email}</span>
+          <span className="font-medium text-sm text-gray-900 dark:text-white">{userName}</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">{user?.email}</span>
         </div>
       </div>
 
@@ -93,8 +94,8 @@ const Sidebar = ({
                   className={cn(
                     "w-full justify-start text-sm font-medium",
                     location.pathname === item.href 
-                      ? "bg-gray-100 text-gray-900" 
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white" 
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
                   )}
                   onClick={() => handleNavigation(item.href)}
                 >
@@ -102,7 +103,7 @@ const Sidebar = ({
                   {item.label}
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="right">
+              <TooltipContent side="right" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                 <p>{item.label}</p>
               </TooltipContent>
             </Tooltip>
@@ -111,10 +112,10 @@ const Sidebar = ({
       </nav>
 
       {/* Theme Toggle */}
-      <div className="border-t border-gray-200 pt-4">
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
         <Button
           variant="ghost"
-          className="w-full justify-start text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          className="w-full justify-start text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
           onClick={onThemeToggle}
         >
           {isDarkMode ? (

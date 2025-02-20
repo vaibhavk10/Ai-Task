@@ -41,33 +41,38 @@ const Settings = () => {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-6">Settings</h1>
-      <div className="max-w-2xl bg-white p-6 rounded-lg shadow">
+    <div className="text-gray-900 dark:text-gray-100">
+      <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Settings</h1>
+      <div className="max-w-2xl bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name" className="text-gray-900 dark:text-white">Name</Label>
             <Input
               id="name"
               placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-gray-200 dark:border-gray-700"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-gray-900 dark:text-white">Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               disabled
-              className="bg-gray-50"
+              className="bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 cursor-not-allowed"
             />
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               Email cannot be changed
             </p>
           </div>
-          <Button type="submit" disabled={isLoading}>
+          <Button 
+            type="submit" 
+            disabled={isLoading}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white"
+          >
             {isLoading ? "Saving..." : "Save Changes"}
           </Button>
         </form>
