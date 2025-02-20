@@ -56,21 +56,56 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 ### Installation
 
 1. Clone the repository
+```bash
+git clone https://github.com/vaibhavk10/Ai-Task.git
+cd ai-task-manager
+```
+
 2. Install dependencies
-```cd ai-task-manager
-npm install```
+```bash
+npm install
+```
 
 3. Set up environment variables
+```bash
+cp .env.example .env
+```
 
-```cp .env.example .env```
-
-env
-
-```VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key```
+Add your Supabase credentials to `.env`:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
 4. Start the development server
-```npm run dev```
+```bash
+npm run dev
+```
+
+## 📱 Screenshots
+
+### Dashboard View
+![Dashboard](screenshots/dashboard.png)
+
+### Task Management
+![Tasks](screenshots/tasks.png)
+
+### AI Assistant Interface
+![AI Assistant](screenshots/ai-assistant.png)
+
+## 🏗️ Project Structure
+```
+src/
+├── components/
+│   ├── ui/          # Reusable UI components
+│   ├── layout/      # Layout components
+│   ├── kanban/      # Kanban board components
+│   └── pages/       # Page components
+├── contexts/        # React contexts
+├── lib/            # Utility functions
+├── services/       # API services
+└── styles/         # Global styles
+```
 
 ## 🔐 Authentication Flow
 
@@ -109,7 +144,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- Your Name - [GitHub](https://github.com/vaibhavk10/Ai-Task)
+- Vaibhav Kumawat - [GitHub](https://github.com/vaibhavk10/Ai-Task)
 
 ## 🙏 Acknowledgments
 
