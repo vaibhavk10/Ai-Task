@@ -85,13 +85,13 @@ npm run dev
 ## 📱 Screenshots
 
 ### Dashboard View
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](src/ss/dashboard.jpg)
 
 ### Task Management
-![Tasks](screenshots/tasks.png)
+![Tasks](src/ss/tasks.jpg)
 
 ### AI Assistant Interface
-![AI Assistant](screenshots/ai-assistant.png)
+![AI Assistant](src/ss/ai.jpg)
 
 ## 🏗️ Project Structure
 ```
