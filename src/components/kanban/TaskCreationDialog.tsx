@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,11 +20,19 @@ import {
 import { Task } from "@/services/taskService";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn, getPriorityColor } from "@/lib/utils";
+import { taskSuggestionService } from "@/services/taskSuggestionService";
+import { useTasks } from "@/contexts/TaskContext";
+import { Plus } from "lucide-react";
 
 interface TaskCreationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskCreate: (task: Omit<Task, "id" | "created_by" | "comments_count">) => Promise<void>;
+}
+
+interface TaskSuggestion {
+  title: string;
+  description: string;
 }
 
 const TaskCreationDialog = ({
@@ -42,6 +50,19 @@ const TaskCreationDialog = ({
     due_date: new Date().toISOString(),
     assignee_id: "",
   });
+  const [suggestions, setSuggestions] = useState<TaskSuggestion[]>([]);
+  const { tasks } = useTasks();
+
+  useEffect(() => {
+    if (open) {
+      loadSuggestions();
+    }
+  }, [open]);
+
+  const loadSuggestions = async () => {
+    const newSuggestions = await taskSuggestionService.getSuggestions(tasks, formData.title);
+    setSuggestions(newSuggestions);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +106,7 @@ const TaskCreationDialog = ({
               required
             />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
@@ -95,6 +116,34 @@ const TaskCreationDialog = ({
               }
               required
             />
+            
+            {/* AI Suggestions */}
+            <div className="mt-4">
+              <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                AI Suggested Tasks:
+              </h4>
+              <div className="space-y-2">
+                {suggestions.map((suggestion, index) => (
+                  <Button
+                    key={index}
+                    type="button"
+                    variant="outline"
+                    className="w-full justify-start text-left"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setFormData({
+                        ...formData,
+                        title: suggestion.title,
+                        description: suggestion.description
+                      });
+                    }}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    {suggestion.title}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>

@@ -11,6 +11,7 @@ import Settings from "./components/pages/Settings";
 import Help from "./components/pages/Help";
 import Login from "./components/pages/Login";
 import AuthCallback from "./components/pages/AuthCallback";
+import { TaskProvider } from "@/contexts/TaskContext";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -30,28 +31,30 @@ function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/auth/callback" element={<AuthCallback />} />
-            
-            {/* Protected Routes with Layout */}
-            <Route
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="/" element={<Home />} />
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/help" element={<Help />} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <TaskProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
+              
+              {/* Protected Routes with Layout */}
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="/" element={<Home />} />
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/help" element={<Help />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </TaskProvider>
       </ThemeProvider>
     </AuthProvider>
   );

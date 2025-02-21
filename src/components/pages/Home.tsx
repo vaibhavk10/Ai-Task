@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import KanbanBoard from "@/components/kanban/KanbanBoard";
-import { Bot, X, Send } from "lucide-react";
+import { Bot, X, Send, Loader2 } from "lucide-react";
+import { aiService } from "@/services/aiService";
+import { useTasks } from "@/contexts/TaskContext";
 
 interface Message {
   text: string;
@@ -22,10 +24,21 @@ const Home = () => {
       timestamp: new Date(),
     },
   ]);
+  const { tasks } = useTasks();
+  const [isAiTyping, setIsAiTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
 
-  const handleSendMessage = () => {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = async () => {
     if (!message.trim()) return;
 
     // Add user message
@@ -34,19 +47,34 @@ const Home = () => {
       { text: message, isBot: false, timestamp: new Date() },
     ]);
 
-    // Simulate AI response
-    setTimeout(() => {
+    setMessage("");
+    setIsAiTyping(true);
+
+    try {
+      // Get AI response
+      const aiResponse = await aiService.generateResponse(message, tasks);
+      
       setMessages((prev) => [
         ...prev,
         {
-          text: "I'm here to help! Let me know what you need assistance with.",
+          text: aiResponse,
           isBot: true,
           timestamp: new Date(),
         },
       ]);
-    }, 1000);
-
-    setMessage("");
+    } catch (error) {
+      console.error("AI Response Error:", error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          text: "I apologize, but I'm having trouble processing your request right now.",
+          isBot: true,
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
+      setIsAiTyping(false);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -190,6 +218,43 @@ const Home = () => {
                   </div>
                 </div>
               ))}
+              {isAiTyping && (
+                <div className="flex items-center space-x-2">
+                  <Bot className="h-4 w-4 text-indigo-600" />
+                  <div className="flex items-center space-x-1">
+                    <Loader2 className="h-4 w-4 animate-spin text-indigo-600" />
+                    <span className="text-sm text-gray-500">AI is typing...</span>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <div className="mb-4 flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setMessage("What are my tasks for today?")}
+                className="text-xs"
+              >
+                Today's Tasks
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setMessage("Show me high priority tasks")}
+                className="text-xs"
+              >
+                High Priority
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setMessage("When is my next deadline?")}
+                className="text-xs"
+              >
+                Next Deadline
+              </Button>
             </div>
 
             <div className="flex items-center gap-2">
