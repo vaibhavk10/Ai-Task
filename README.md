@@ -178,6 +178,19 @@ src/
 - Time tracking
 - Progress visualization
 
+### Docker & Kubernetes for Containerized Deployment
+
+To ensure seamless deployment and scalability, the AI Task Manager utilizes Docker and Kubernetes:
+- **Docker**: Containerizes the application, making it easy to run in any environment.
+- **Kubernetes**: Manages the deployment, scaling, and operation of application containers across clusters of hosts.
+
+### Automate AI Task Assignment Based on Priority
+
+The application leverages AI to automate task assignments based on priority:
+- **Dynamic Task Allocation**: Tasks are assigned to team members based on their current workload and expertise.
+- **Real-Time Adjustments**: The system continuously evaluates task priorities and reallocates as necessary.
+
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
