@@ -12,6 +12,7 @@ import Help from "./components/pages/Help";
 import Login from "./components/pages/Login";
 import AuthCallback from "./components/pages/AuthCallback";
 import { TaskProvider } from "@/contexts/TaskContext";
+import Success from "@/components/pages/Success";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -35,6 +36,7 @@ function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/success" element={<Success />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               
               {/* Protected Routes with Layout */}

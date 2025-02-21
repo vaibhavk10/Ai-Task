@@ -16,6 +16,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isVerificationSent, setIsVerificationSent] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -23,29 +24,18 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setSuccessMessage("");
 
     try {
       if (isSignUp) {
-        const { error, data } = await signUp(email, password);
+        const { error } = await signUp(email, password);
         if (error) throw error;
         
-        const { error: updateError } = await supabase.auth.updateUser({
+        await supabase.auth.updateUser({
           data: { full_name: name }
         });
 
-        if (updateError) throw updateError;
-        
-        setEmail("");
-        setPassword("");
-        setName("");
-        setIsSignUp(false);
-        setIsVerificationSent(true);
-        
-        toast({
-          title: "Account created successfully!",
-          description: "Please verify your email to login.",
-          duration: 5000,
-        });
+        navigate("/success");
       } else {
         const { error } = await signIn(email, password);
         if (error) throw error;
@@ -164,7 +154,7 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="h-11 rounded-lg"
+                className="h-11 rounded-lg text-black"
                 placeholder="Enter your email"
                 required
               />
@@ -179,7 +169,7 @@ const Login = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-11 rounded-lg"
+                className="h-11 rounded-lg text-black"
                 placeholder="Enter your password"
                 required
               />
@@ -195,13 +185,15 @@ const Login = () => {
               ) : (
                 <Sparkles className="h-4 w-4 mr-2" />
               )}
-              {isLoading
-                ? "Processing..."
-                : isSignUp
-                ? "Create Account"
-                : "Sign In"}
+              {isLoading ? "Processing..." : isSignUp ? "Create Account" : "Sign In"}
             </Button>
           </form>
+
+          {successMessage && (
+            <div className="mt-4 text-green-600">
+              {successMessage}
+            </div>
+          )}
 
           <div className="mt-6 text-center">
             <button
@@ -241,7 +233,7 @@ const Login = () => {
           <div className="text-indigo-600 mb-4">
             <Bot className="h-8 w-8" />
           </div>
-          <h3 className="text-lg font-semibold mb-2">Smart Task Analysis</h3>
+          <h3 className="text-indigo-600 mb-4">Smart Task Analysis</h3>
           <p className="text-gray-500 text-sm">
             AI-powered insights to optimize your task management
           </p>
@@ -256,7 +248,7 @@ const Login = () => {
           <div className="text-indigo-600 mb-4">
             <Sparkles className="h-8 w-8" />
           </div>
-          <h3 className="text-lg font-semibold mb-2">Intelligent Prioritization</h3>
+          <h3 className="text-indigo-600 mb">Intelligent Prioritization</h3>
           <p className="text-gray-500 text-sm">
             Let AI help you prioritize tasks effectively
           </p>
@@ -271,7 +263,7 @@ const Login = () => {
           <div className="text-indigo-600 mb-4">
             <Bot className="h-8 w-8" />
           </div>
-          <h3 className="text-lg font-semibold mb-2">Automated Workflows</h3>
+          <h3 className="text-indigo-600 mb-4">Automated Workflows</h3>
           <p className="text-gray-500 text-sm">
             Streamline your processes with AI automation
           </p>
