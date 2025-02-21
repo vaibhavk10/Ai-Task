@@ -138,7 +138,7 @@ const Login = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="h-11 rounded-lg"
+                  className="h-11 rounded-lg text-black"
                   placeholder="Enter your full name"
                   required={isSignUp}
                 />
