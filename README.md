@@ -21,6 +21,15 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 
 ## 🛠️ Technologies
 
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.io/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+
+</div>
 - **Frontend**: React 18 with TypeScript
 - **Styling**: Tailwind CSS + Shadcn/ui
 - **Backend**: Supabase
