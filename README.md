@@ -30,6 +30,7 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
 </div>
+
 - **Frontend**: React 18 with TypeScript
 - **Styling**: Tailwind CSS + Shadcn/ui
 - **Backend**: Supabase
