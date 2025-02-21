@@ -21,17 +21,6 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 
 ## 🛠️ Technologies
 
-<div style="display: flex; gap: 20px; flex-wrap: wrap;">
-
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.io/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-
-</div>
-
-### Core Technologies
 - **Frontend**: React 18 with TypeScript
 - **Styling**: Tailwind CSS + Shadcn/ui
 - **Backend**: Supabase
@@ -39,12 +28,6 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 - **State Management**: React Context + Hooks
 - **Authentication**: Supabase Auth
 - **Database**: PostgreSQL (via Supabase)
-
-### UI Components
-- **Component Library**: shadcn/ui
-- **Icons**: Lucide Icons
-- **Animations**: Framer Motion
-- **Drag & Drop**: react-beautiful-dnd
 
 ## 🚀 Getting Started
 
@@ -54,32 +37,30 @@ A modern, AI-enhanced task management system built with React, TypeScript, and S
 - Supabase account
 
 ### Installation
-
 1. Clone the repository
-```bash
-git clone https://github.com/vaibhavk10/Ai-Task.git
-cd Ai-Task
-```
-
+   ```bash
+   git clone https://github.com/vaibhavk10/Ai-Task.git
+   cd Ai-Task
+   ```
 2. Install dependencies
-```bash
-npm install
-```
-
+   ```bash
+   npm install
+   ```
 3. Set up environment variables
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env
+   ```
+   Add your Supabase credentials to `.env`:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. Set up Supabase SQL
+<details>
+<summary>Click to expand SQL setup</summary>
 
-Add your Supabase credentials to `.env`:
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-Supbase SQL Editor
-
-```-- Drop existing table and policies
+```sql
+-- Drop existing table and policies
 drop policy if exists "Enable read access for all users" on public.tasks;
 drop policy if exists "Enable insert access for all users" on public.tasks;
 drop policy if exists "Enable update access for all users" on public.tasks;
@@ -119,12 +100,14 @@ create policy "Users can update their own tasks"
 create policy "Users can delete their own tasks"
   on public.tasks for delete
   using (auth.uid() = created_by);
-  ```
+```  
 
-4. Start the development server
-```bash
-npm run dev
-```
+</details>
+
+5. Start the development server
+   ```bash
+   npm run dev
+   ```
 
 ## 📱 Screenshots
 
@@ -137,74 +120,33 @@ npm run dev
 ### AI Assistant Interface
 ![AI Assistant](src/ss/ai.jpg)
 
-## 🏗️ Project Structure
-```
-src/
-├── components/
-│   ├── ui/          # Reusable UI components
-│   ├── layout/      # Layout components
-│   ├── kanban/      # Kanban board components
-│   └── pages/       # Page components
-├── contexts/        # React contexts
-├── lib/            # Utility functions
-├── services/       # API services
-└── styles/         # Global styles
-```
+## 📄 Documentation
 
-## 🔐 Authentication Flow
-
-1. User signs up/logs in using email
-2. Email verification sent for new accounts
-3. JWT token stored securely
-4. Protected routes and API calls
-
-## 🎯 Key Features Explained
-
-### AI Assistant
-- Real-time task suggestions
-- Natural language processing
-- Context-aware responses
-- Task optimization recommendations
-
-### Task Management
-- Drag-and-drop Kanban board
-- Priority levels (High, Medium, Low)
-- Due date tracking
-- Progress monitoring
-
-### Performance Analytics
-- Task completion rates
-- Productivity metrics
-- Time tracking
-- Progress visualization
+### How AI Tools Helped
+- **Tempolabs AI**: Created the initial project structure.
+- **Cursor AI**: Assisted in writing code efficiently.
+- **Hugging Face API**: Used for AI chatbot and task suggestions.
+- **ChatGPT**: Provided support for code generation and debugging.
 
 ### Docker & Kubernetes for Containerized Deployment
-
-To ensure seamless deployment and scalability, the AI Task Manager utilizes Docker and Kubernetes:
-- **Docker**: Containerizes the application, making it easy to run in any environment.
-- **Kubernetes**: Manages the deployment, scaling, and operation of application containers across clusters of hosts.
+- **Docker**: Containerizes the application for easy deployment.
+- **Kubernetes**: Manages deployment and scaling of application containers.
 
 ### Automate AI Task Assignment Based on Priority
-
-The application leverages AI to automate task assignments based on priority:
-- **Dynamic Task Allocation**: Tasks are assigned to team members based on their current workload and expertise.
-- **Real-Time Adjustments**: The system continuously evaluates task priorities and reallocates as necessary.
-
+- **Dynamic Task Allocation**: Assigns tasks based on team members' workloads.
+- **Real-Time Adjustments**: Continuously evaluates and reallocates tasks as needed.
 
 ## 🤝 Contributing
-
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## 📄 License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Authors
-
 - Vaibhav Kumawat - [GitHub](https://github.com/vaibhavk10/Ai-Task)
 
 ## 🙏 Acknowledgments
-
 - [Shadcn/ui](https://ui.shadcn.com/) for the beautiful components
 - [Supabase](https://supabase.io/) for the backend infrastructure
 - [Tailwind CSS](https://tailwindcss.com/) for the styling system
+
