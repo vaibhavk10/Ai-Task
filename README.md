@@ -127,8 +127,7 @@ create policy "Users can delete their own tasks"
 ### Task Management
 ![Tasks](src/ss/tasks.jpg)
 
-### AI Assistant Interface
-![AI Assistant](src/ss/ai.jpg)
+
 
 ### AI Task suggestions
 ![AI Task Suggestions](src/ss/aisuggestion.jpg)
